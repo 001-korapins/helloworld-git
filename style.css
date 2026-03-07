@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans+Thai:wght@100..800&family=Quicksand:wght@300..700&display=swap');
+
+*{
+    font-family: "Quicksand", sans-serif;
+    font-family: "Playpen Sans Thai", cursive;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    background-color: rgb(190, 190, 190);
+}
+
+.container{
+    margin-top: 100px;
+    justify-items: center;
+}
+
+.image img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.about {
+    margin-top: 50px;
+    border: 6px solid white;
+    background-color: antiquewhite;
+    border-radius: 5%;
+    padding: 50px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.about-img img{
+    border-radius: 30px;
+    border: 6px solid white;
+    margin-top: 10px;
+}
