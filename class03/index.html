@@ -1,0 +1,138 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Todo App</title>
+<style>
+  body { font-family: Arial; margin: 40px; }
+  .todo-item { padding: 6px; cursor: pointer; }
+  .completed { text-decoration: line-through; color: gray; }
+  .edit-btn{
+  background-color: rgb(255, 183, 48);
+  border: 1px solid darkorange;
+  border-radius: 3px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.delete-btn{
+  background-color: rgb(255, 114, 114);
+  border: 1px solid rgb(239, 5, 5);
+  border-radius: 3px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+  <h2>Todo List</h2>
+  <input id="text-input" placeholder="ชื่องาน">
+  <button id="add-btn" style="background-color: aquamarine; border-radius: 3px; border : solid green ;">เพิ่มงาน</button>
+  <hr>
+  <ul id="todo-list"></ul>
+
+  <script>
+
+    const input = document.querySelector("#text-input")
+    const addBtn = document.getElementById('add-btn')
+    const list = document.getElementById('todo-list')
+    // console.log(input, addBtn , list)
+
+    // const testItem = document.createElement('li')
+    // testItem.textContent = "Korapin Suandokmai"
+    // // console.log(testItem)
+    // list.appendChild(testItem)
+
+
+    let todos = [{id : 1 , text : 'Learn Dom ', completed : false}]
+
+    let i =0
+    render()
+
+    function render(){
+      list.innerHTML = "";
+      todos.forEach((todo) => {
+        const li = document.createElement('li');
+        li.className = "todo-item"
+        li.dataset.id = todo.id
+        const span = document.createElement('span')
+        span.textContent = todo.text
+        li.appendChild(span)
+
+        if (todo.completed) {
+          li.classList.add("completed")
+        }
+
+        const editBtn = document.createElement("button")
+        editBtn.textContent = "edit"
+        editBtn.className = "edit-btn"
+        li.appendChild(editBtn)
+
+        const deleteBtn = document.createElement("button")
+        deleteBtn.textContent = "delete"
+        deleteBtn.className = "delete-btn"
+        li.appendChild(deleteBtn)
+
+        list.appendChild(li)
+
+      })
+    }
+
+    list.addEventListener('click', (e) => {
+      const li = e.target.closest("li")
+      const id = Number(li.dataset.id)
+
+      const todo = todos.find(i => i.id === id)
+      if (e.target.tagName === "Li" || e.target.tagName === "SPAN") {
+        todo.complated = !todo.complated
+        render()
+      }
+
+      if (e.target.classList.contains("delete-btn")) {
+        const id = Number(e.target.parentElement.dataset.id)
+        todos = todos.filter(todo => todo.id !== id)
+        render()
+        return
+      }
+
+      if (e.target.classList.contains("edit-btn")) {
+        const id = Number(e.target.parentElement.dataset.id)
+        const todo = todos.find(i => i.id === id)
+        const newText = prompt("Edit todo", todo.text)
+        if (newText != null && newText.trim() !== ""){
+          todo.text = newText
+          render()
+        }
+        
+      }
+    })
+
+
+    addBtn.addEventListener('click', () => {
+      const text = input.value
+      if (text === ""){
+        alert("กรอก!")
+        return
+      }
+      // console.log(text)
+      // const li = document.createElement('li')
+      // li.textContent = text
+      // list.appendChild(li)
+      const newTodo = {
+        id : Date.now(),
+        text : text ,
+        completed : false
+      }
+
+      todos .push(newTodo)
+      input.value = ""
+      render()
+    })
+
+
+  </script>
+</body>
+</html> 
+
+ 
